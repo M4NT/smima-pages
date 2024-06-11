@@ -1,12 +1,18 @@
 const express = require("express");
-const session = require('express-session');
+const session = require("express-session");
 
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const os = require("os");
 
+const path = require("path");
+const cors = require('cors');
 const app = express();
 const port = 3000;
+
+app.use(cors({
+  origin: 'http://localhost:5500' // substitua por sua origem
+}));
 
 app.use(
   session({
@@ -18,6 +24,7 @@ app.use(
 );
 
 // Middleware para analisar dados do corpo da solicitação
+app.use(express.static(path.join(__dirname, "../smima-pages")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -58,14 +65,11 @@ app.post("/register", (req, res) => {
     (err, result) => {
       if (err) {
         console.error("Erro ao inserir o usuário no banco de dados:", err);
-        res.status(500).send(`
-          <div class="alert alert-danger" role="alert">
-            Erro ao processar a solicitação.
-          </div>
-        `);
+        // Retorna uma mensagem de erro mais detalhada
+        res.json({ error: true, message: `Erro ao processar a solicitação: ${err.message}` });
       } else {
         console.log("Usuário inserido com sucesso:", result);
-        res.redirect('/login.html');
+        res.json({ error: false, message: 'Registro bem-sucedido!' });
       }
     }
   );
