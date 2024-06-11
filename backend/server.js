@@ -1,10 +1,21 @@
 const express = require("express");
+const session = require('express-session');
+
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const os = require("os");
 
 const app = express();
 const port = 3000;
+
+app.use(
+  session({
+    secret: "smimae10", // substitua 'your secret key' por uma chave secreta de sua escolha
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }, // Note que 'secure' deve ser verdadeiro em produção se estiver usando HTTPS
+  })
+);
 
 // Middleware para analisar dados do corpo da solicitação
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -54,11 +65,7 @@ app.post("/register", (req, res) => {
         `);
       } else {
         console.log("Usuário inserido com sucesso:", result);
-        res.status(200).send(`
-          <div class="alert alert-success" role="alert">
-            Usuário cadastrado com sucesso.
-          </div>
-        `);
+        res.redirect('/login.html');
       }
     }
   );
