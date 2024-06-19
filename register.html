@@ -129,8 +129,8 @@
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="settingButton">
                                                 <li><a class="dropdown-item" href="my-account.html">Minha conta</a></li>
-                                                <li><a class="dropdown-item" href="login-register.html">Login |
-                                                        Registre-se</a>
+                                                <li><a class="dropdown-item" href="login.html"> Login</a>
+
                                                 </li>
                                             </ul>
                                         </li>
@@ -232,8 +232,8 @@
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="stickysettingButton">
                                                 <li><a class="dropdown-item" href="my-account.html">Minha conta</a></li>
-                                                <li><a class="dropdown-item" href="login-register.html">Login |
-                                                        Registre-se</a>
+                                                <li><a class="dropdown-item" href="login.html"> Login</a>
+
                                                 </li>
                                             </ul>
                                         </li>
@@ -286,7 +286,8 @@
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButtonTwo">
                                         <li><a class="dropdown-item" href="my-account.html">Minha conta</a></li>
-                                        <li><a class="dropdown-item" href="login-register.html">Login | Registre-se</a>
+                                        <li><a class="dropdown-item" href="login.html"> Login</a>
+
                                         </li>
                                     </ul>
                                 </li>
@@ -685,6 +686,39 @@
 
     <!--Main JS (Common Activation Codes)-->
     <script src="assets/js/main.js"></script>
+
+    <!-- <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+    
+          const formData = new FormData(this);
+          const data = {
+            username: formData.get('username'),
+            email: formData.get('email'),
+            password: formData.get('password'),
+            cpf: formData.get('cpf')
+          };
+    
+          fetch('http://localhost:3000/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          })
+          .then(response => response.json())
+          .then(result => {
+            if (!result.error) {
+              window.location.href = 'index.html';
+            } else {
+              console.error(`Erro: ${result.message}`);
+            }
+          })
+          .catch(error => {
+            console.error('Erro:', error);
+          });
+        });
+      </script> -->
 
 </body>
 
